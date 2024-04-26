@@ -12,7 +12,6 @@ using namespace std;
 #define _tstring string
 #define _tcin cin
 #endif
-int a = 000;
 class CConfigFile
 {
 public:
