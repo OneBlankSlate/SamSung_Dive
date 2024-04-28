@@ -58,6 +58,9 @@
     <Filter Include="进程管理\进程内存\修改内存值">
       <UniqueIdentifier>{c05799ab-c954-4e95-b802-f53535d408df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="进程管理\虚拟内存映射">
+      <UniqueIdentifier>{0d193120-fc9e-445b-9bfe-ceaed58a5ca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -126,6 +129,12 @@
     <ClInclude Include="EditValueDlg.h">
       <Filter>进程管理\进程内存\修改内存值</Filter>
     </ClInclude>
+    <ClInclude Include="VMMapDlg.h">
+      <Filter>进程管理\虚拟内存映射</Filter>
+    </ClInclude>
+    <ClInclude Include="_VMMap.h">
+      <Filter>进程管理\虚拟内存映射</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SamSung Dive.cpp">
@@ -172,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="EditValueDlg.cpp">
       <Filter>进程管理\进程内存\修改内存值</Filter>
+    </ClCompile>
+    <ClCompile Include="VMMapDlg.cpp">
+      <Filter>进程管理\虚拟内存映射</Filter>
+    </ClCompile>
+    <ClCompile Include="_VMMap.cpp">
+      <Filter>进程管理\虚拟内存映射</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

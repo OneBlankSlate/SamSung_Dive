@@ -6,6 +6,7 @@
 #include"ConfigFile.h"
 #include"./TrueColorToolBar.h"
 #include"IocpServer.h"
+#include"VMMapDlg.h"
 typedef struct
 {
 	char* TitleData;          //列表的名称

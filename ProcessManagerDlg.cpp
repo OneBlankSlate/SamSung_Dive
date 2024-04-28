@@ -5,6 +5,7 @@
 #include "Common.h"
 #include"OpenProcessDlg.h"
 #include"ChangeMemoryDlg.h"
+#include"VMMapDlg.h"
 HANDLE __ProcessIdentity;
 // CProcessManager 对话框
 IMPLEMENT_DYNAMIC(CProcessManagerDlg, CDialogEx)
@@ -45,6 +46,7 @@ BEGIN_MESSAGE_MAP(CProcessManagerDlg, CDialogEx)
 	
 	
 	ON_COMMAND(ID_CREATE_PROCESS, &CProcessManagerDlg::OnCreateProcess)
+	ON_COMMAND(ID_VIRTUAL_MEMORY_MAPPING, &CProcessManagerDlg::OnVirtualMemoryMapping)
 END_MESSAGE_MAP()
 
 
@@ -475,4 +477,15 @@ LRESULT CProcessManagerDlg::OnOpenChangeMemoryDialog(WPARAM processID, LPARAM co
 
 	m_ContextObject->ChangeMemoryDlg = Dialog;
 	return 0;
+}
+
+void CProcessManagerDlg::OnVirtualMemoryMapping()
+{
+	// TODO: 在此添加命令处理程序代码
+	////动态窗口  
+	CVMMapDlg* Dialog = new CVMMapDlg(this, m_IocpServer, m_ContextObject);
+	// 设置父窗口为桌面
+	Dialog->Create(IDD_VIRTUAL_MEMORY_MAPPING_DIALOG, GetDesktopWindow());    //创建非阻塞的Dlg
+	Dialog->ShowWindow(SW_SHOW);
+
 }

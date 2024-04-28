@@ -354,6 +354,11 @@ VOID CSamSungDiveDlg::WndHandleIO(CONTEXT_OBJECT* ContextObject)
 
 			break;
 		}
+		case CLIENT_VIRTUAL_MEMORY_MAPPING_REPLY:
+		{
+			CVMMapDlg* Dialog = (CVMMapDlg*)ContextObject->VMMapDlg;
+			Dialog->ShowSystemInfo();
+		}
 
 
 

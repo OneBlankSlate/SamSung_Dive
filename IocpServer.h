@@ -63,6 +63,7 @@ typedef struct _CONTEXT_OBJECT_
 	int DlgIdentity;
 	HANDLE DlgHandle;    //HWND(用户对象)     HANDLE(内核对象)
 	HANDLE    ChangeMemoryDlg;   //MemoryEditor窗口
+	HANDLE    VMMapDlg;
 
 } CONTEXT_OBJECT, * PCONTEXT_OBJECT;
 typedef CList<PCONTEXT_OBJECT> 	CONTEXT_LIST;      //MFC的官方类模板

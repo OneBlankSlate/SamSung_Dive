@@ -5,7 +5,7 @@
 #include "SamSung Dive.h"
 #include "afxdialogex.h"
 #include "OpenProcessDlg.h"
-
+#include"Common.h"
 
 // COpenProcessDlg 对话框
 
@@ -68,8 +68,8 @@ void COpenProcessDlg::OnBnClickedOk()
 	edit->GetWindowText(v1);
 	int BufferLength = sizeof(v1) + 1;
 	char* BufferData = (char*)VirtualAlloc(NULL, BufferLength, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-	memset(BufferData, 0, sizeof(char)*BufferLength);
-	sprintf(BufferData, "%s", v1.GetBuffer(0));
+	BufferData[0] = CLIENT_OPEN_PROCESS_REQUIRE;
+	memcpy(BufferData + sizeof(BYTE), v1, sizeof(v1));
 	m_IocpServer->OnPrepareSending(m_ContextObject,(PBYTE)BufferData,strlen(BufferData));
 
 

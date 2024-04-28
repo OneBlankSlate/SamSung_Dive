@@ -6,15 +6,10 @@
 #include"Common.h"
 #include"EditValueDlg.h"
 #include"ProcessHelper.h" 
+#include"SamSung DiveDlg.h"
 HANDLE GlobalProcessHandle = 0;
 size_t __TargetAddress = 0;
 
-/*****定义我的列表数据结构体*****/
-typedef struct
-{
-	char* TitleData;             //列表的名称
-	int		TitleWidth;            //列表的宽度
-}COLUMN_DATA;
 
 /*****Client表头*****/
 COLUMN_DATA __AddressInfoList[] =
