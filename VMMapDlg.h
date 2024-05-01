@@ -29,6 +29,7 @@ protected:
 private:
 	CIocpServer* m_IocpServer;
 	PCONTEXT_OBJECT m_ContextObject;
+	
 public:
 	afx_msg void OnEnChangeEdit6();
 	CEdit m_edit1;
@@ -40,10 +41,22 @@ public:
 	CEdit m_edit7;
 	CEdit m_edit8;
 	CEdit m_edit9;
+	list<MEMORY_BASIC_INFORMATION> m_MemoryBasicInfoList;
 	virtual BOOL OnInitDialog();
-	CListCtrl m_InfoList;
-	afx_msg void OnBnClickedButton1();
+//	CListCtrl m_InfoList;
+//	afx_msg void OnBnClickedButton1();
 	
-	afx_msg void OnBnClickedQueryButton();
-	void ShowSystemInfo();
+//	afx_msg void OnBnClickedQueryButton();
+	void ShowClientInfo();
+	void UpdateSystemInfo();
+	CButton m_Commit_Check;
+	CButton m_Reserve_Check;
+	CButton m_Free_Check;
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedUpdateButton();
+	CListCtrl m_MemoryInfoList;
+	static HANDLE m_ProcessIdentity;
+	static CString m_ProcessPath;
+	CEdit m_ProcessIdentity_edit;
+	CEdit m_ProcessFullPath_edit;
 };

